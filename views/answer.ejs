@@ -1,0 +1,29 @@
+<%-include('./partials/header') %>
+
+<h1><%= question.title%></h1> 
+<p><%= question.body%></p>
+<p><%= question.tags%></p>
+<% question.answers.forEach((ans, i)=>{ %>
+    <div>
+      <a href="/likes/<%= ans.id%>?_method=POST">
+      <button onclick="Click(event)"
+      data-post-id="ans.id"><i class="fas fa-chevron-up"></i>Like</button>
+      <%= ans.likes%></i></a>
+    <p><%=ans.answer%></p>
+    </div>
+  <% }) %>
+<form action="/answer" method="post">
+    <label for="">Answer</label>
+    <textarea class ="form-control"name="answer" id="" cols="150" rows="10"></textarea>
+    <button class="btn btn-primary" type="submit" name="quesID" value="<%= question.id%>">Submit Answer</button>
+</form>
+<script >
+
+function Click(event)
+{
+  var ansID=event.target.dataset.postId,
+  var action=event.target.textContent.trim();
+}
+</script>
+
+<%-include('./partials/footer') %>
