@@ -1,0 +1,38 @@
+nav{
+    background-color: #28DF99;
+}
+form{
+    margin: auto;
+    max-width: 35%;
+}
+input
+{
+    border: 0%;
+    border-radius: 0%;
+}
+.button
+{
+    text-align: center;
+}
+
+
+/* body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+} */
+
+.entry
+{
+    max-width: 100%;
+    width: 100%;
+    margin-top: 7%;
+    box-shadow:  5px 10px 8px 10px #888888;
+    padding: 0%;
+}
+input .form-control
+{
+    padding: 0.5% 0;
+}

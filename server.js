@@ -7,6 +7,11 @@ const passport= require("passport");
 const User=require("./model/users");
 const Question= require("./model/question");
 const Answer=require("./model/answer");
+const bcrypt= require("bcrypt");
+const { text } = require("body-parser");
+const saltRound=10;
+require("dotenv").config();
+const Text=process.env.text;
 
 // const setOfQues=[];
 // const homeContent="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -22,10 +27,11 @@ app.use(session(
 ));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use("/user",require('./routes/auth'));
 
 mongoose.connect("mongodb://localhost:27017/VivarnaDB");
 
-app.use(session({
+app.use(session({ 
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false
@@ -34,15 +40,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(User.createStrategy());
-passport.serializeUser((user, done)=>
-{
-    done(null, user);
-});
-passport.deserializeUser((user, done)=>
-{
-    done(null, user);
-});
 const answer= Answer(
     {
         answer: "",
@@ -62,18 +59,17 @@ app.get("/", (req, res)=>{
         }
     })
 });
-
 app.get("/about", (req, res)=>{
     res.render("about");
 });
 
-app.get("/login", (req, res)=>{
-    res.render("login");
-});
-app.get("/signUp", (req, res)=>{
+// app.get("/login", (req, res)=>{
+//     res.render("login");
+// });
+// app.get("/signUp", (req, res)=>{
 
-    res.render("signup");
-});
+//     res.render("signup");
+// });
 app.get("/question", (req, res)=>{
     if(req.isAuthenticated)
     {
@@ -85,13 +81,6 @@ app.get("/question", (req, res)=>{
     }
 });
 app.post("/question", (req, res) =>{
-    // let question={
-    //     title:req.body.quesTitle,
-    //     body: req.body.quesBody,
-    //     tags: req.body.quesTags
-    // }
-    // setOfQues.push(question);
-    // const date=new Date;
     const question= new Question({
         title: req.body.quesTitle,
         body: req.body.quesBody,
@@ -121,17 +110,6 @@ app.post("/answer", (req, res)=>{
 });
 
 app.get("/answer/:id", (req, res)=>{
-    // res.send("<h1>req.params.requestedQues</h1>");
-    // let question={title: "", body: "", tags: ""}
-    // setOfQues.forEach((ques, i)=>{
-    //     if(ques.title === req.params.requestedQues){
-    //         question={
-    //             title: ques.title,
-    //             body: ques.body,
-    //             tags: ques.tags
-    //         }
-    //     }
-    // });
     console.log(req.params.id);
     Question.findById(req.params.id, (err, question)=>
     {
@@ -140,7 +118,6 @@ app.get("/answer/:id", (req, res)=>{
             res.render("answer", {question: question});
     }
     })
-    // res.render("answer", {question: question});
 });
 
 app.post("/likes/:id", (req, res)=>
@@ -155,33 +132,6 @@ app.post("/likes/:id", (req, res)=>
     })
 });
 
-// Authenication of User
-
-app.post("/signup", (req, res)=>
-{
-    const users= new User({name: req.body.Name, email: req.body.emailId, username: req.body.userName, password:""});
-    console.log(req.body.Password);
-    console.log(req.body.confirmPassword)
-    if(req.body.Password===req.body.confirmPassword)
-    {
-        User.register(users, req.body.Password, (err, user)=>
-        {
-            if(err){console.log("error");
-            res.redirect("/signup");}
-            else
-            {
-                console.log("registered");
-                passport.authenticate('local')(req, res, ()=>{
-                    console.log("no errors");
-                    res.redirect("/question")
-                });
-            }
-        });
-    }
-    else{
-        console.log("Re-type your password");
-    }
-});
 
 
 app.listen(3000, ()=>{console.log("Server started on port 3000")});

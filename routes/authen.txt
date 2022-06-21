@@ -1,0 +1,69 @@
+// Authenication of User
+
+// app.post("/signup", (req, res)=>
+// {
+//     // const users= new User({name: req.body.Name, email: req.body.emailId, username: req.body.userName, password:""});
+//     const {Name, emailID, userName, Password, confirmPassword}= req.body;
+//     console.log(req.body.Password);
+//     console.log(req.body.confirmPassword)
+//     User.findOne({email: emailID}, (err, user)=>{
+//         if(user){
+//             console.log("A user with this E-Mail Address is already present. Please try another Email-ID");
+//         }
+//     });
+//     User.findOne({username: userName}, (err, user)=>{
+//         if(user){
+//             console.log("This username is already used. Try some thing else!")
+//         }
+//     });
+//     if(Password===confirmPassword)
+//     {
+//         const newUser= new User({
+//             name: Name,
+//             email: emailID,
+//             username: userName,
+//             password: Password
+//         });
+//         bcrypt.genSalt(saltRound, (err, salt)=>
+//         {
+//             bcrypt.hash(Text, salt, (err, hash)=>
+//             {
+//                 if(err){console.log(err);}
+//                 else{
+//                     newUser.password=hash;
+//                     newUser.save((err)=>{
+//                         if(err){console.log(err);}
+//                         else{
+//                             res.redirect("/question");
+//                         }
+//                     })
+//                 }
+//             })
+//         })
+//     }
+//     else{
+//         console.log("Re-type your password");
+//     }
+// });
+// // passport.use(new LocalStrategy(
+// //     function(username, password, done)
+// //     {
+// //         User.findOne({username: username}, (err, user)=>
+// //         {
+// //             if(err){return (done(err));}
+// //             if(!user){return (done(null, false));}
+// //             bcrypt.compare(Text, hash, (err, result)=>
+// //             {
+// //                 if(err){console.log(err);}
+// //                 if(result)
+// //                 {done(null, true);}else{
+// //                     done(null, false);
+// //                 }
+// //             })
+// //         })
+// //     }
+// // ))
+// app.post("/login", (req, res)=>
+// {
+//     console.log(req.body);
+// });

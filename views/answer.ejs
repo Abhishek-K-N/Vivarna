@@ -1,5 +1,4 @@
 <%-include('./partials/header') %>
-
 <h1><%= question.title%></h1> 
 <p><%= question.body%></p>
 <p><%= question.tags%></p>
@@ -21,7 +20,7 @@
 
 function Click(event)
 {
-  var ansID=event.target.dataset.postId,
+  var ansID=event.target.dataset.postId
   var action=event.target.textContent.trim();
 }
 </script>

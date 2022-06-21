@@ -1,13 +1,13 @@
 <%-include('./partials/header') %>
-
+<div class="container-sm">
 <% setOfQues.reverse().forEach((ques, i)=>{ %>
-    <div class="container question-block">
-    <h2 class="ques-title"><%= ques.title%></h2>
-    <p class="ques-body"><%= ques.body.substr(0, 300) + '...' %></p>
-    <p class="ques-tag"><%= ques.tags %></p>
+    <div class="question-block">
+    <h2 class="ques ques-title"><%= ques.title%></h2>
+    <p class="ques ques-body"><%= ques.body.substr(0, 300) + '...' %></p>
+    <p class="ques ques-tag"><%= ques.tags %></p>
     <a class="btn ans-btn" href="/answer/<%=ques.id%>">Answer</a>
     </div>
   <% }) %>
-
+</div>
 
 <%-include('./partials/footer') %>

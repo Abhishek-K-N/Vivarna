@@ -1,31 +1,34 @@
 <%-include('./partials/header') %>
 
 
-<div class="container">
-    <form action="/signup" method="post">
-
+<div class="container-fluid entry">
+    <form action="" method="post">
+      <div class="row">
       <div class="form-floating">
-        <input name="Name" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input name="Name" type="text" class="form-control pt-1" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Full Name</label>
       </div>
       
-      <div class="form-floating">
+      <div class="form-floating col-sm-12">
         <input name="userName" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">User Name</label>
       </div>
-      <div class="form-floating">
+      <div class="form-floating col-md-12">
         <input name="emailId" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
       </div>
-      <div class="form-floating">
+      <div class="form-floating col-md-12">
         <input name="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
-      <div class="form-floating">
+      <div class="form-floating col-md-12">
         <input name="confirmPassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Confirm Password</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+      <div class="button">
+      <button class="w-75 btn btn-primary" type="submit">Sign in</button>
+    </div>
+    </div>
     </form>
   </div>
 
